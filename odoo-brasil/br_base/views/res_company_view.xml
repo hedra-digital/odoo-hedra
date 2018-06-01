@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_inherited" model="ir.ui.view">
+        <field name="name">view_company_form_inherited</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]/h1" position="after">
+                <label for="legal_name" class="oe_edit_only"/>
+                <h3>
+                    <field name="legal_name" placeholder="Legal Name"/>
+                </h3>
+            </xpath>
+            <field name="street2" position="replace"/>
+            <field name="zip" position="replace"/>
+            <field name="street" position="replace">
+                <field name="zip" placeholder="Zip Code" class="o_address_zip" />
+                <field name="street" placeholder="Street" class="o_address_street" />
+                <field name="number" placeholder="Number" class="o_address_city"/>
+                <field name="street2" placeholder="Complement" class="o_address_street" />
+                <field name="district" placeholder="District" class="o_address_state" />
+            </field>
+            <field name="state_id" position="attributes">
+                <attribute name="domain">[('country_id','=',country_id)]</attribute>
+                <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+            </field>
+            <field name="country_id" position="replace"/>
+            <field name="state_id" position="before">
+                <field name="country_id" placeholder="Country" class="o_address_country"
+                    options="{'no_create': True, 'no_create_edit': True}" />
+            </field>
+            <field name="state_id" position="after">
+                <field name="city_id" placeholder="City" options="{'no_create': True, 'no_create_edit': True}"/>
+            </field>
+            <field name="city" position="replace">
+                <field name="city" invisible="1"/>
+            </field>
+            <field name="company_registry" position="after">
+                <field name="cnpj_cpf" placeholder="CNPJ"/>
+                <field name="inscr_est" placeholder="State Inscription"/>
+                <field name="inscr_mun" placeholder="Municipal Inscription"/>
+                <field name="suframa" placeholder="Suframa"/>
+            </field>
+            <group position="inside">
+                <group string="Digital Certificate">
+                    <field name="nfe_a1_file" />
+                    <field name="nfe_a1_password" password="True" />
+                    <field name="cert_state" />
+                    <field name="cert_expire_date" />
+                    <field name="cert_information" />
+                </group>
+            </group>
+        </field>
+    </record>
+    <record id="view_company_tree_inherited" model="ir.ui.view">
+        <field name="name">res.company.tree.inherited</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree"/>
+        <field name="field_parent">child_ids</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="cnpj_cpf"/>
+            </field>
+        </field>
+    </record>
+</odoo>

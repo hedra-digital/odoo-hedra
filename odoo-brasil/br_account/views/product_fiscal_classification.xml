@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_br_account_product_fiscal_classification_form" model="ir.ui.view">
+        <field name="name">br_account.product.fiscal.classification.form</field>
+        <field name="model">product.fiscal.classification</field>
+        <field name="arch" type="xml">
+            <form string="Classificações Fiscais (NCM)">
+                <group name="general">
+                    <group>
+                        <field name="code"/>
+                        <field name="category"/>
+                        <field name="name"/>
+                        <field name="unidade_tributacao"/>
+                        <field name="descricao_unidade"/>
+                        <field name="company_id"/>
+                    </group>
+                    <group>
+                        <field name="federal_nacional" />
+                        <field name="federal_importado" />
+                        <field name="estadual_imposto" />
+                        <field name="municipal_imposto" />
+                    </group>
+                </group>
+                <group>
+                    <group name="icms_st" string="ICMS ST">
+                        <field name="cest"/>
+                        <field name="tax_icms_st_id"/>
+                        <field name="icms_st_aliquota_reducao_base"/>
+                        <field name="icms_st_aliquota_mva"/>
+                    </group>
+                    <group name="ipi" string="IPI">
+                        <field name="classe_enquadramento" />
+                        <field name="codigo_enquadramento" />
+                        <field name="tax_ipi_id" />
+                        <field name="ipi_tipo" />
+                        <field name="ipi_cst" />
+                        <field name="ipi_reducao_bc" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_br_account_product_fiscal_classification_tree" model="ir.ui.view">
+        <field name="name">br_account.product.fiscal.classification.tree</field>
+        <field name="model">product.fiscal.classification</field>
+        <field name="arch" type="xml">
+            <tree string="Classificações Fiscais (NCM)">
+                <field name="code"/>
+                <field name="category"/>
+                <field name="name"/>
+                <field name="federal_nacional" />
+                <field name="federal_importado" />
+                <field name="estadual_imposto" />
+                <field name="municipal_imposto" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_br_account_product_fiscal_classification_search" model="ir.ui.view">
+        <field name="name">br_account.product.fiscal.classification.search</field>
+        <field name="model">product.fiscal.classification</field>
+        <field name="arch" type="xml">
+            <search string="NCM">
+                <field name="code"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_br_account_product_fiscal_classification" model="ir.actions.act_window">
+        <field name="name">Classificações Fiscais (NCM)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.fiscal.classification</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_br_account_product_fiscal_classification_tree"/>
+    </record>
+
+    <menuitem id="menu_br_account_product_fiscal_classification" name="Classificações Fiscais (NCM)"
+        parent="menu_br_account" sequence="0" action="action_br_account_product_fiscal_classification"/>
+
+</odoo>

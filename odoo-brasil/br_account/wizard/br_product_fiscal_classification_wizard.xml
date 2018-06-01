@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="br_product_fiscal_classification_wizard">
+        <field name="name">br_product_fiscal_classification.wizard.form</field>
+        <field name="model">product.fiscal.classification.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Importar Classificações Fiscais (NCM)">
+                <group>
+                    <group>
+                        <field name="product_fiscal_class_csv" />
+                        <field name="ncm_csv_delimiter" />
+                    </group>
+                    <group>
+                        <field name="has_quote_char" />
+                        <field name="ncm_quote_char" attrs="{'invisible': [('has_quote_char','!=', True)]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="import_ncm" type="object" string="Importar NCM" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="br_product_fiscal_classification_action"  model="ir.actions.act_window">
+        <field name="name">Importar Classificações Fiscais (NCM)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.fiscal.classification.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem sequence="3" action="br_product_fiscal_classification_action"
+              id="menu_br_account_product_fiscal_classification_wizard"
+              parent="menu_br_account"
+              name="Importar Tabela IBPT"/>
+
+
+</odoo>

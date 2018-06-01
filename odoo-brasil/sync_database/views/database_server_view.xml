@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+   <record id="view_production_lot_form_sync" model="ir.ui.view">
+     <field name="name">stock.production.lot.form.inherit</field>
+     <field name="model">stock.production.lot</field>
+     <field name="inherit_id" ref="stock.view_production_lot_form"/>
+     <field name="arch" type="xml">
+        <field name='ref' position="after">
+          <field name='sync'/>
+        </field>
+     </field>
+   </record>
+
+   <!--<record id="view_stock_quant_form_sync" model="ir.ui.view">
+     <field name="name">stock.quant.form.inherit</field>
+     <field name="model">stock.quant</field>
+     <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+     <field name="arch" type="xml">
+        <field name='inventory_value' position="after">
+          <field name='sync'/>
+        </field>
+     </field>
+   </record> -->
+       
+       
+        <record model="ir.ui.view" id="database_server_form">
+	    <field name="name">Database Synchronization</field>
+            <field name="model">database.sync</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="SFTP Connection" >
+		 <header>
+                     <button name="test_connection" type='object' class="btn-primary o_sale_confirm" string='Test Connection'/>
+                 </header>
+		 <sheet>  
+                     <div class="oe_horizontal_separator oe_clear ">
+                            Server SFTP Settings
+                     </div>
+		     <group>
+			 <label for="name"/>
+		         <h3><field name="name" colspan="4" placeholder="Example: 192.168.1.1" required="1" /></h3>
+			 <label for="dbase_name"/>
+		         <h3><field name="dbase_name" colspan="4" placeholder="Database Name." /></h3>
+			 <field name="credential"/>
+			 <field name="server_connected" />
+	             </group>
+	             <notebook>
+                           <page string="Sync Data" attrs="{'invisible': [('server_connected','!=', True)]}">
+			    <group col='3'>
+				     <group> 
+                       <button name="sync_product_mapping" type='object' class="btn-primary o_sale_confirm" string='Sync Product'/>
+                       <button name="sync_state_id" type='object' class="btn-primary o_sale_confirm" string='Sync States'/> 
+				     </group>
+				     <group>
+                       <button name="sync_partner_mapping" type='object' class="btn-primary o_sale_confirm" string='Sync Partners'/>     
+                       <button name="sync_partner_address" type='object' class="btn-primary o_sale_confirm" string='Sync Addresses' /> 
+				     </group>
+				     <group> 
+		       <button name="sync_invoice" type='object' class="btn-primary o_sale_confirm" string='Sync Invoice'/>  
+				     </group>
+			      </group>
+			    </page>
+			    <page string="Credentials" attrs="{'invisible': [('credential','!=', True)]}">
+				 <group>
+				     <group>
+					 <label for="user"/>
+					 <h3><field name="user" placeholder="Example: sftpuser" required="1" /></h3>
+				     </group>
+				     <group>
+				          <label for="password"/>
+				          <h3><field name="password" placeholder="Example: sftppassword" required="1" /></h3>
+				     </group>
+			         </group>
+			     </page>
+	              </notebook>
+	         </sheet>  
+	       </form>
+	    </field>
+	</record>
+
+       <record model="ir.ui.view" id="database_server_tree">
+           <field name="name">Database Synchronization</field>
+           <field name="model">database.sync</field>
+	   <field name="type">tree</field>
+	   <field name="arch" type="xml">
+	       <tree string='Database Information'>
+	           <field name="name"></field>
+	           <field name="dbase_name"></field>
+	           <field name="user"></field>
+	           <field name="password" password="True"/>
+	        </tree>
+	    </field>
+	</record>
+
+        <record model="ir.actions.act_window" id="action_database_server">
+	    <field name="name">Database Synchronization</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">database.sync</field>
+	    <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>   
+	    <field name="view_id" ref="database_server_tree"/>
+	</record>
+
+        <menuitem id="menu_database_server" parent="base.menu_custom" sequence="16" action="action_database_server"/>
+ 
+        
+    </data>
+</odoo>		
+		

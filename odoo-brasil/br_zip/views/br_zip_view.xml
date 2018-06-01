@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_br_zip_tree">
+        <field name="name">br.zip</field>
+        <field name="model">br.zip</field>
+        <field name="arch" type="xml">
+            <tree string="CEPs">
+                <field name="zip" select="1"/>
+                <field name="district" select="1"/>
+                <field name="street_type" select="1"/>
+                <field name="street" select="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_br_zip_form">
+        <field name="name">br.zip</field>
+        <field name="model">br.zip</field>
+        <field name="arch" type="xml">
+            <form string="CEPs">
+                <group>
+                    <field name="zip" select="1"/>
+                    <field name="street_type" select="1"/>
+                    <field name="street" select="1"/>
+                    <field name="district" select="2"/>
+                    <field name="country_id" select="2"/>
+                    <field name="state_id" select="2"/>
+                    <field name="city_id" select="2"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_br_zip">
+        <field name="name">CEPs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">br.zip</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_br_zip_tree"/>
+    </record>
+
+</odoo>

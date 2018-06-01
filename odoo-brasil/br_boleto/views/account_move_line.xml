@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_move_line_form" model="ir.ui.view">
+        <field name="name">account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/group/group[2]" position="after">
+                <group name="boletos" string="Boletos">
+                    <field name="payment_mode_id" />
+                    <field name="nosso_numero" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_br_boleto_account_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="br_account_payment.view_payments_tree_a_receber" />
+        <field name="arch" type="xml">
+            <button name="action_register_payment" position="after">
+                <button name="open_wizard_print_boleto" type="object" string="Boletos" icon="fa-barcode"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

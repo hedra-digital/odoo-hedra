@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="book_create_isbn_view" model="ir.ui.view">
+        <field name="name">Book Create from Isbn</field>
+        <field name="model">book.create.isbn</field>
+        <field name="arch" type="xml">
+                <form string="Confirm Draft Invoices">
+                    <group>
+                        <field name="product_image"  attrs="{'invisible': [('is_search_book', '=', False)]}" widget="image" class="oe_avatar"/>
+                        <field name="is_search_book" invisible="True"/>
+                        <field name="search_book" attrs="{'invisible': [('is_search_book', '=', True)]}"/>
+                        <field name="isbn_auther_ids" attrs="{'invisible': [('is_search_book', '=', False)]}" widget="many2many_tags"/>
+                        <field name="full_title" attrs="{'invisible': [('is_search_book', '=', False)]}" />
+                        <field name="isbn" attrs="{'invisible': [('is_search_book', '=', False)]}" />
+                        <field name="isbn_13"  attrs="{'invisible': [('is_search_book', '=', False)]}"/>
+                        <field name="edition" attrs="{'invisible': [('is_search_book', '=', False)]}" />
+                        <field name="isbn_publisher_id" attrs="{'invisible': [('is_search_book', '=', False)]}"/>
+                        <field name="publish_date" attrs="{'invisible': [('is_search_book', '=', False)]}"/>
+                        <field name="binding" attrs="{'invisible': [('is_search_book', '=', False)]}" />
+                    </group>    
+                    <footer>
+                        <button string="Search Book" name="search_book_isbn_code" type="object" default_focus="1" class="btn-primary" attrs="{'invisible': [('is_search_book', '=', True)]}"/>
+
+                        <button string="Create Book Product" name="create_product_from_isbn_book" type="object" default_focus="1" class="btn-primary" attrs="{'invisible': [('is_search_book', '=', False)]}"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+        </field>
+    </record>
+
+    <record id="action_book_create_isbn_menu" model="ir.actions.act_window">
+        <field name="name">Search Book In Isbn Database</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">book.create.isbn</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="book_create_isbn_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_book_create_isbn"
+        name="Search Book In Isbn Database"
+        parent="sale.sale_menu_root"
+        action="action_book_create_isbn_menu"
+       />
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="base.br" model="res.country">
+        <field name="address_format" eval="'%(street)s, %(number)s - %(street2)s\n%(district)s\n%(zip)s - %(city_name)s - %(state_code)s\n%(country_name)s'" />
+    </record>
+
+    <record id="view_br_base_city_tree" model="ir.ui.view">
+        <field name="name">l10n_br_base.res.state.city</field>
+        <field name="model">res.state.city</field>
+        <field name="arch" type="xml">
+            <tree string="Cities">
+                <field name="name" select="1"/>
+                <field name="state_id" select="1"/>
+                <field name="ibge_code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_br_base_city_form" model="ir.actions.act_window">
+        <field name="name">City</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.state.city</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_br_base_city_tree"/>
+    </record>
+
+</odoo>
