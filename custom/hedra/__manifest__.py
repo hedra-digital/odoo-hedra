@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "Hedra",
+    'name': "Vendor Consignment",
 
     'summary': 'Estoque Consignado',
 
